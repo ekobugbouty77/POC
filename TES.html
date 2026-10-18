@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Spoofing - Browser Test</title>
+</head>
+<body>
+    <h1>UI Spoofing Test</h1>
+    <p>Pengujian perilaku address bar browser.</p>
+
+    <button id="pipButton">Go</button>
+
+    <script>
+        document.getElementById("pipButton").addEventListener("click", () => {
+            const w = window.open("about:blank#");
+
+            if (!w) {
+                alert("Tab baru diblokir oleh browser.");
+                return;
+            }
+
+            w.document.write(`
+                <!DOCTYPE html>
+                <html lang="id">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Blank Page Test</title>
+                </head>
+                <body>
+                    <h1>UI Spoofing Test</h1>
+                    <p>Periksa address bar browser pada tab ini.</p>
+                    <a href="https://example.com/">
+                        Buka domain pengujian
+                    </a>
+                </body>
+                </html>
+            `);
+
+            w.document.close();
+        });
+    </script>
+</body>
+</html>
